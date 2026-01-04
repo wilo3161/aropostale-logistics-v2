@@ -9,7 +9,7 @@ import logging
 import threading
 import time
 from datetime import datetime, timedelta
-from modules import config
+from . import config
 import plotly.graph_objects as go
 
 logger = logging.getLogger(__name__)
