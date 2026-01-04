@@ -1,3 +1,14 @@
+import sys
+import os
+
+# --- PARCHE DE RUTA PARA STREAMLIT CLOUD ---
+# Esto obliga a Python a mirar dentro de la carpeta actual para encontrar 'modules'
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# -------------------------------------------
+
+# Ahora sí, tus imports normales
+import streamlit as st
+from modules import config, ui, auth, database, pdf_utils, reconciliation, wilo_ai
 import streamlit as st
 import pandas as pd
 import time
