@@ -1,6 +1,6 @@
 import streamlit as st
 from supabase import create_client, Client
-import config
+from modules import config
 import logging
 import pandas as pd
 
