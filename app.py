@@ -1,10 +1,31 @@
+import streamlit as st
 import sys
 import os
 
-# --- PARCHE DE RUTA PARA STREAMLIT CLOUD ---
-# Esto obliga a Python a mirar dentro de la carpeta actual para encontrar 'modules'
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-# -------------------------------------------
+# --- INICIO DEL PARCHE DE DIAGNÓSTICO Y RUTA ---
+# 1. Obtener la ruta absoluta donde está este archivo app.py
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 2. Agregar esa ruta al sistema de Python para que pueda importar 'modules'
+sys.path.append(current_dir)
+
+# 3. Diagnóstico visual (Esto saldrá en tu pantalla de Streamlit si falla)
+print(f"Directorio actual: {current_dir}")
+print(f"Archivos aquí: {os.listdir(current_dir)}")
+if "modules" in os.listdir(current_dir):
+    print("✅ La carpeta 'modules' fue encontrada.")
+else:
+    print("❌ ERROR CRÍTICO: La carpeta 'modules' NO está en este directorio.")
+# --- FIN DEL PARCHE ---
+
+# AHORA SÍ LOS IMPORTS DE TUS MÓDULOS
+try:
+    from modules import config, ui, auth, database, pdf_utils, reconciliation, wilo_ai
+except ImportError as e:
+    st.error(f"Error importando módulos: {e}")
+    st.warning("Revisa los logs en la consola de Streamlit Cloud (Manage App -> Logs)")
+    st.stop()
+
 
 # Ahora sí, tus imports normales
 import streamlit as st
