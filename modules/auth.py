@@ -1,5 +1,5 @@
 import streamlit as st
-from modules import config
+from . import config
 
 def login_form(target_role="user"):
     st.markdown("### 🔐 Acceso Requerido")
