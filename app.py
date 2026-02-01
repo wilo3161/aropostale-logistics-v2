@@ -1,6 +1,6 @@
 import streamlit as st
-import sys
 import os
+from dotenv import load_dotenv
 
 # --- PARCHE MAESTRO DE RUTAS (SOLUCIÓN DEFINITIVA) ---
 # 1. Obtiene la ruta absoluta donde vive ESTE archivo (app.py)
@@ -24,3 +24,6 @@ except ImportError as e:
     st.error(f"🚨 Error Crítico de Importación: {e}")
     st.info("Asegúrate de que la carpeta se llame 'modules' (minúscula) y tenga un archivo '__init__.py' dentro.")
     st.stop()
+if __name__ == "__main__":
+    load_dotenv()
+    main()
