@@ -1,29 +1,50 @@
 import streamlit as st
 import os
+import sys
+from pathlib import Path
 from dotenv import load_dotenv
 
-# --- PARCHE MAESTRO DE RUTAS (SOLUCIÓN DEFINITIVA) ---
-# 1. Obtiene la ruta absoluta donde vive ESTE archivo (app.py)
-directorio_raiz = os.path.dirname(os.path.abspath(__file__))
+# --- PARCHE MAESTRO DE RUTAS ---
+# Usamos Pathlib para mayor robustez en entornos Linux/Cloud
+current_dir = Path(__file__).parent.absolute()
 
-# 2. Agrega esa ruta al sistema de Python para que SIEMPRE encuentre 'modules'
-#    sin importar desde dónde lance Streamlit la aplicación.
-if directorio_raiz not in sys.path:
-    sys.path.append(directorio_raiz)
+if str(current_dir) not in sys.path:
+    sys.path.insert(0, str(current_dir))
 
-# 3. Diagnóstico (Opcional: te mostrará en pantalla si falta algo)
-# st.write(f"DEBUG: Buscando módulos en: {directorio_raiz}")
-# st.write(f"DEBUG: Archivos encontrados: {os.listdir(directorio_raiz)}")
-# -----------------------------------------------------
-
-# AHORA SÍ, TUS IMPORTS NORMALES
+# --- IMPORTACIÓN DE MÓDULOS ---
 try:
-    # Nota: Aquí ya no necesitamos parches raros, solo llamar al paquete
+    # Importamos config primero para asegurar que las variables de entorno estén listas
     from modules import config, ui, auth, database, pdf_utils, reconciliation, wilo_ai
 except ImportError as e:
     st.error(f"🚨 Error Crítico de Importación: {e}")
-    st.info("Asegúrate de que la carpeta se llame 'modules' (minúscula) y tenga un archivo '__init__.py' dentro.")
+    st.info("Revisión: Verifica que 'modules/__init__.py' exista y que los nombres de archivos coincidan.")
     st.stop()
+
+def main():
+    """
+    Punto de entrada principal de la aplicación.
+    """
+    # Configuración de página (Debe ser la primera instrucción de Streamlit)
+    st.set_page_config(
+        page_title="Aeropostale Logistics v2",
+        page_icon="🚀",
+        layout="wide"
+    )
+
+    # Autenticación (Supuesto: auth tiene una función de login)
+    if not auth.check_password():
+        st.stop()
+
+    # Interfaz Principal (Llamada a tu módulo UI)
+    ui.render_sidebar()
+    ui.render_header()
+    
+    st.success("Conexión con módulos establecida correctamente.")
+    
+    # Ejemplo de acción de base de datos
+    if st.sidebar.button("Probar Conexión DB"):
+        database.test_connection()
+
 if __name__ == "__main__":
     load_dotenv()
     main()
