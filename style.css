@@ -1,0 +1,125 @@
+/* style.css - Estilos Profesionales para Dashboard Logístico */
+
+/* 1. Reset y Tipografía */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333333; /* Texto principal oscuro */
+    background-color: #f8f9fa; /* Fondo gris muy claro */
+}
+
+/* Encabezados */
+.header-container {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #007BFF; /* Línea de color corporativo */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+h1 {
+    color: #004085; /* Azul oscuro corporativo */
+    font-weight: 600;
+    margin: 0;
+}
+
+h2 {
+    color: #343a40;
+    border-left: 5px solid #007BFF;
+    padding-left: 10px;
+    margin-top: 30px;
+}
+
+h3 {
+    color: #6c757d;
+}
+
+.subtitle {
+    color: #6c757d;
+    font-size: 1.1em;
+    margin-top: -10px;
+}
+
+/* 2. Estilo de Tarjetas KPI (Torre de Control) */
+.kpi-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+    border-left: 5px solid #007BFF; /* Toque de color */
+}
+
+.kpi-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.kpi-icon {
+    font-size: 2.5em;
+    margin-right: 15px;
+}
+
+.kpi-title {
+    font-size: 0.9em;
+    color: #6c757d;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.kpi-value {
+    font-size: 2.0em;
+    font-weight: 700;
+    color: #343a40;
+    line-height: 1.2;
+}
+
+/* Colores de iconos (Semáforo y Neutro) */
+.green-icon { color: #28A745; } /* Éxito */
+.yellow-icon { color: #FFC107; } /* Advertencia */
+.red-icon { color: #DC3545; } /* Peligro */
+.blue-icon { color: #007BFF; } /* Informativo (Corporativo) */
+
+
+/* 3. Streamlit Overrides */
+
+/* Contenedor principal */
+.stApp {
+    background-color: #f8f9fa;
+}
+
+/* Sidebar (Para un look más profesional y oscuro) */
+.css-1d391kg, .css-1lcbmhc { /* Clases de Streamlit para el sidebar */
+    background-color: #343a40; /* Fondo oscuro */
+    color: white;
+}
+
+/* Títulos en Sidebar */
+.css-1d391kg h2, .css-1lcbmhc h2 {
+    color: #ffffff;
+    border-left: none;
+    padding-left: 0;
+}
+
+/* Texto en Sidebar */
+.css-1d391kg p, .css-1lcbmhc p {
+    color: #ced4da;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 30px;
+    font-size: 0.8em;
+    color: #adb5bd;
+}
+
+/* Separadores */
+hr {
+    border-top: 1px solid #e9ecef;
+}
